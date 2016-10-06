@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HealthHabitTracker</string>
+
+    <string name="average_sleep">Average sleep time</string>
+    <string name="average_kilometers">Average walking distance</string>
+    <string name="days_without_fruits">Days without fruits</string>
+    <string name="last_reading">Last reading</string>
+</resources>
