@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.android.healthhabittracker.data.HabitContract.HabitEntry;
 
+import static com.example.android.healthhabittracker.data.HabitContract.HabitEntry.CREATE_HABIT_TABLE;
+
 /**
  * Created by nicolaslacaze on 30/09/2016.
  */
@@ -25,13 +27,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
     //Creates tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_HABIT_TABLE = "CREATE TABLE " + HabitEntry.TABLE_NAME + "("
-                + HabitEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + HabitEntry.COLUMN_DIET + " INTEGER DEFAULT 0,"
-                + HabitEntry.COLUMN_WALK + " INTEGER DEFAULT 0,"
-                + HabitEntry.COLUMN_SLEEP + " INTEGER NOT NULL,"
-                + HabitEntry.COLUMN_BOOK + " TEXT" + ");";
-        db.execSQL(CREATE_HABIT_TABLE);
+        db.execSQL(HabitEntry.CREATE_HABIT_TABLE);
     }
 
     @Override

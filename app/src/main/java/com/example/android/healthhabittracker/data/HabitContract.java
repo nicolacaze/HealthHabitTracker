@@ -25,5 +25,12 @@ public final class HabitContract {
         public static final int DIET_NO = 0;
 
         public static final int DIET_YES = 1;
+
+        public static final String CREATE_HABIT_TABLE = "CREATE TABLE " + HabitEntry.TABLE_NAME + "("
+                + HabitEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + HabitEntry.COLUMN_DIET + " INTEGER DEFAULT 0,"
+                + HabitEntry.COLUMN_WALK + " INTEGER DEFAULT 0,"
+                + HabitEntry.COLUMN_SLEEP + " INTEGER NOT NULL,"
+                + HabitEntry.COLUMN_BOOK + " TEXT" + ");";
     }
 }

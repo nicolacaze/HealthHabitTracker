@@ -31,21 +31,14 @@ public class DashboardActivity extends AppCompatActivity {
         displayDatabaseSummary();
     }
 
+    //Make a query to database and display relevant results to user.
     private void displayDatabaseSummary() {
+
         //Create a readable database from our Helper.
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-        //Define projection arguments. Which column of the database are we looking at.
-        String[] projection = {
-                HabitEntry._ID,
-                HabitEntry.COLUMN_DIET,
-                HabitEntry.COLUMN_WALK,
-                HabitEntry.COLUMN_SLEEP,
-                HabitEntry.COLUMN_BOOK
-        };
-
-        //Perform a query search into the database and make the selection.
-        Cursor cursor = db.query(HabitEntry.TABLE_NAME, projection, null, null, null, null, null);
+        //Perform a query search into the database and return a Cursor object as a selection.
+        Cursor cursor = readData(db);
 
         try {
             //Target  each specific columns of our Cursor by getting the index.
@@ -74,7 +67,7 @@ public class DashboardActivity extends AppCompatActivity {
                     int hoursOfSleep = cursor.getInt(hoursSleptColumnIndex);
                     totalHoursSlept += hoursOfSleep;
                     //Check if we ate fruits that given day
-                    if (cursor.getInt(dietColumnIndex) == 0) {
+                    if (cursor.getInt(dietColumnIndex) == HabitEntry.DIET_NO) {
                         totalDaysDiet += 1;
                     }
                     //When cursor is on last row get last reading title
@@ -106,6 +99,18 @@ public class DashboardActivity extends AppCompatActivity {
             cursor.close();
         }
         db.close();
+    }
+
+    private Cursor readData(SQLiteDatabase db) {
+        //Define projection arguments. Which column of the database are we looking at.
+        String[] projection = {
+                HabitEntry._ID,
+                HabitEntry.COLUMN_DIET,
+                HabitEntry.COLUMN_WALK,
+                HabitEntry.COLUMN_SLEEP,
+                HabitEntry.COLUMN_BOOK
+        };
+        return db.query(HabitEntry.TABLE_NAME, projection, null, null, null, null, null);
     }
 
     private void deleteAllHabits() {
